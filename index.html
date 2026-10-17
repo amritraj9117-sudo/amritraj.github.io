@@ -1,0 +1,2304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amrit Raj | BS-MS Undergraduate @ IISER Mohali</title>
+  <meta name="description" content="Portfolio of Amrit Raj — BS-MS Student at IISER Mohali specializing in Scientific Computing, Machine Learning, Mathematical Physics, and Experimental Sciences." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #060609;
+      --bg-card: rgba(17, 17, 23, 0.88);
+      --bg-card-hover: rgba(24, 24, 34, 0.95);
+      --purple-primary: #a855f7;
+      --purple-bright: #c084fc;
+      --purple-dark: #581c87;
+      --purple-glow: rgba(168, 85, 247, 0.45);
+      --purple-soft: rgba(168, 85, 247, 0.14);
+      --cyan-accent: #38bdf8;
+      --amber-accent: #facc15;
+      --emerald-accent: #34d399;
+      --text-main: #f8fafc;
+      --text-muted: #cbd5e1;
+      --text-dim: #94a3b8;
+      --border-subtle: rgba(255, 255, 255, 0.09);
+      --border-purple: rgba(168, 85, 247, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      line-height: 1.65;
+    }
+
+    /* Animated Starfield Canvas */
+    #starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Custom Cursor Ring + Dot (matching screenshot 1-5) */
+    .cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid rgba(255, 255, 255, 0.45);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cursor-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--purple-primary);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--purple-primary), 0 0 18px var(--purple-bright);
+    }
+
+    @media (hover: none), (max-width: 768px) {
+      .cursor-ring {
+        display: none;
+      }
+    }
+
+    /* Sci-Fi / Cyberpunk Stencil Accent Typography */
+    .scifi-accent {
+      font-family: 'Orbitron', 'JetBrains Mono', monospace;
+      color: var(--purple-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+      text-shadow: 0 0 18px rgba(168, 85, 247, 0.35);
+      position: relative;
+      display: inline-block;
+    }
+
+    .scifi-date {
+      font-family: 'Orbitron', 'JetBrains Mono', monospace;
+      color: var(--purple-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
+    }
+
+    /* Floating Pill Navbar */
+    .navbar-wrapper {
+      position: fixed;
+      top: 18px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      z-index: 1000;
+      padding: 0 16px;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(12, 12, 18, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      padding: 6px 10px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.65), 0 0 25px rgba(168, 85, 247, 0.08);
+      max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .navbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-link {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
+      color: #ffffff;
+    }
+
+    .nav-link.active {
+      color: #ffffff;
+      background: rgba(88, 28, 135, 0.38);
+      border-color: rgba(168, 85, 247, 0.7);
+      box-shadow: 0 0 16px rgba(168, 85, 247, 0.35);
+    }
+
+    /* Main Content Wrapper */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 110px 24px 80px;
+    }
+
+    section {
+      scroll-margin-top: 96px;
+      margin-bottom: 115px;
+    }
+
+    /* Section Headings */
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.75rem, 3.5vw, 2.55rem);
+      font-weight: 800;
+      margin-bottom: 52px;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    /* Hero & About Section (Screenshot 1) */
+    .hero-section {
+      padding-top: 8px;
+      text-align: center;
+    }
+
+    .hero-name-title {
+      font-size: clamp(1.6rem, 3.2vw, 2.35rem);
+      font-weight: 500;
+      color: #f8fafc;
+      letter-spacing: -0.01em;
+      margin-bottom: 42px;
+      text-shadow: 0 2px 20px rgba(255, 255, 255, 0.12);
+    }
+
+    .hero-name-title .pipe {
+      color: rgba(255, 255, 255, 0.55);
+      margin: 0 6px;
+      font-weight: 300;
+    }
+
+    .hero-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 980px;
+      margin: 0 auto 68px;
+      gap: 20px;
+    }
+
+    .icon-orb-btn {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: rgba(18, 18, 26, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .icon-orb-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      border-color: var(--purple-primary);
+      box-shadow: 0 0 22px rgba(168, 85, 247, 0.4);
+    }
+
+    .icon-orb-btn .tooltip {
+      position: absolute;
+      bottom: -38px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 15, 23, 0.95);
+      border: 1px solid var(--border-purple);
+      color: #fff;
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      border-radius: 8px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .icon-orb-btn:hover .tooltip {
+      opacity: 1;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .glow-pill-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 38px;
+      border-radius: 999px;
+      background: rgba(15, 15, 22, 0.9);
+      color: #ffffff;
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1.5px solid rgba(168, 85, 247, 0.65);
+      box-shadow: 0 0 25px rgba(168, 85, 247, 0.25), inset 0 0 14px rgba(168, 85, 247, 0.12);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .glow-pill-btn:hover {
+      background: rgba(88, 28, 135, 0.35);
+      border-color: var(--purple-bright);
+      box-shadow: 0 0 32px rgba(168, 85, 247, 0.55), inset 0 0 18px rgba(168, 85, 247, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* About Me Card */
+    .about-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(20, 20, 28, 0.92) 0%, rgba(12, 12, 17, 0.94) 100%);
+      border-radius: 26px;
+      padding: 54px 48px;
+      max-width: 1080px;
+      margin: 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75);
+      overflow: hidden;
+    }
+
+    /* Glowing purple top-left border accent matching Screenshot 1 */
+    .about-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 26px;
+      padding: 2px;
+      background: linear-gradient(135deg, #a855f7 0%, rgba(168, 85, 247, 0.35) 35%, rgba(255, 255, 255, 0.05) 70%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .about-card h2 {
+      font-size: clamp(1.65rem, 3vw, 2.25rem);
+      font-weight: 800;
+      margin-bottom: 24px;
+      color: #ffffff;
+    }
+
+    .about-card p {
+      font-size: 1.08rem;
+      color: #d1d5db;
+      max-width: 900px;
+      margin: 0 auto 28px;
+      line-height: 1.85;
+      font-weight: 400;
+    }
+
+    .about-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .highlight-chip {
+      background: rgba(168, 85, 247, 0.11);
+      border: 1px solid rgba(168, 85, 247, 0.38);
+      color: #e9d5ff;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .highlight-chip span.val {
+      color: #ffffff;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+    }
+
+    /* Dynamic Scroll-Triggered Experience Timeline (Screenshot 2) */
+    .timeline-container {
+      position: relative;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 0 40px;
+    }
+
+    /* Center Vertical Track */
+    .timeline-track {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateX(-50%);
+      border-radius: 4px;
+    }
+
+    /* Dynamic Scroll Progress Bar inside Track */
+    .timeline-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(180deg, #c084fc 0%, #a855f7 65%, #7e22ce 100%);
+      box-shadow: 0 0 18px #a855f7, 0 0 32px rgba(168, 85, 247, 0.6);
+      border-radius: 4px;
+      transition: height 0.12s ease-out;
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 80px 1fr;
+      align-items: start;
+      margin-bottom: 90px;
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Center Node + Giant Outlined Number */
+    .timeline-center {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 22px;
+      z-index: 3;
+    }
+
+    .timeline-node {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--bg-deep);
+      border: 2.5px solid rgba(168, 85, 247, 0.6);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .timeline-item.active-node .timeline-node {
+      background: #c084fc;
+      border-color: #ffffff;
+      box-shadow: 0 0 18px #a855f7, 0 0 34px #a855f7;
+      transform: scale(1.15);
+    }
+
+    .timeline-node-sub {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--bg-deep);
+      border: 2px solid rgba(168, 85, 247, 0.55);
+      margin-top: 26px;
+    }
+
+    /* Giant Hollow Outlined Index Number (01, 02, 03, 04) matching Screenshot 2 */
+    .timeline-number {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(3.5rem, 6vw, 5.4rem);
+      font-weight: 900;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 2px rgba(168, 85, 247, 0.45);
+      letter-spacing: 0.04em;
+      user-select: none;
+      transition: all 0.4s ease;
+      margin-bottom: 18px;
+    }
+
+    .timeline-item.active-node .timeline-number {
+      -webkit-text-stroke: 2.5px rgba(192, 132, 252, 0.85);
+      filter: drop-shadow(0 0 16px rgba(168, 85, 247, 0.35));
+    }
+
+    /* Left / Right alternating layout */
+    .timeline-left {
+      padding-right: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .timeline-right {
+      padding-left: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .timeline-item.left-card .timeline-left {
+      align-items: flex-end;
+    }
+
+    .timeline-item.left-card .timeline-right {
+      align-items: flex-start;
+      padding-top: 64px;
+    }
+
+    .timeline-item.right-card .timeline-left {
+      align-items: flex-end;
+      padding-top: 64px;
+      text-align: right;
+    }
+
+    .timeline-item.right-card .timeline-right {
+      align-items: flex-start;
+    }
+
+    /* Experience Card (Screenshot 2) */
+    .exp-card {
+      width: 100%;
+      max-width: 485px;
+      background: rgba(18, 18, 24, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 22px;
+      padding: 34px 30px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+      transition: all 0.35s ease;
+      text-align: center;
+      position: relative;
+    }
+
+    .exp-card:hover {
+      border-color: rgba(168, 85, 247, 0.55);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 28px rgba(168, 85, 247, 0.18);
+      transform: translateY(-4px);
+    }
+
+    .exp-org-pill {
+      display: inline-block;
+      padding: 6px 22px;
+      border-radius: 999px;
+      background: rgba(88, 28, 135, 0.32);
+      border: 1px solid rgba(168, 85, 247, 0.48);
+      color: #c084fc;
+      font-size: 0.84rem;
+      font-weight: 600;
+      margin-bottom: 22px;
+    }
+
+    .exp-icon-box {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 20px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #0d253f 0%, #07111e 100%);
+      border: 2px solid #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+    }
+
+    .exp-role-title {
+      font-size: 1.52rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.3;
+      margin-bottom: 20px;
+      text-shadow: 0 0 18px rgba(255, 255, 255, 0.35);
+    }
+
+    .exp-bullets {
+      list-style: none;
+      text-align: left;
+      color: #d1d5db;
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+    .exp-bullets li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 10px;
+    }
+
+    .exp-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--purple-bright);
+      font-weight: bold;
+    }
+
+    .exp-meta-date {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--purple-primary);
+      letter-spacing: 0.06em;
+      line-height: 1.35;
+      text-transform: uppercase;
+      text-shadow: 0 0 16px rgba(168, 85, 247, 0.35);
+    }
+
+    .exp-meta-sub {
+      color: var(--text-dim);
+      font-size: 0.88rem;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    /* Projects Showcase Section (Screenshot 3) */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .project-card {
+      background: rgba(18, 18, 24, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 24px;
+      padding: 36px 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.35s ease;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      border-color: rgba(168, 85, 247, 0.6);
+      box-shadow: 0 20px 55px rgba(0, 0, 0, 0.8), 0 0 30px rgba(168, 85, 247, 0.2);
+      transform: translateY(-5px);
+    }
+
+    .project-card.featured-wide {
+      grid-column: span 2;
+    }
+
+    .project-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .project-tag-pill {
+      padding: 7px 20px;
+      border-radius: 999px;
+      background: rgba(88, 28, 135, 0.32);
+      border: 1px solid rgba(168, 85, 247, 0.48);
+      color: #c084fc;
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    .project-title {
+      font-size: clamp(1.45rem, 2.3vw, 1.85rem);
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 14px;
+      text-shadow: 0 0 18px rgba(255, 255, 255, 0.3);
+    }
+
+    .project-desc {
+      color: #cbd5e1;
+      font-size: 0.98rem;
+      line-height: 1.72;
+      margin-bottom: 24px;
+    }
+
+    /* Project Score & Metric Badges */
+    .metrics-showcase {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .metric-box {
+      flex: 1;
+      min-width: 145px;
+      background: rgba(10, 10, 16, 0.85);
+      border: 1px solid rgba(168, 85, 247, 0.42);
+      border-radius: 16px;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .metric-box .metric-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    .metric-box .metric-value {
+      font-family: 'Orbitron', 'JetBrains Mono', monospace;
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #c084fc;
+      text-shadow: 0 0 14px rgba(168, 85, 247, 0.45);
+    }
+
+    .metric-box .metric-sub {
+      font-size: 0.76rem;
+      color: #34d399;
+      font-weight: 500;
+    }
+
+    /* Confusion Matrix Visual Component inside SDSS Card */
+    .sdss-split-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .cm-widget {
+      background: rgba(10, 10, 15, 0.92);
+      border: 1px solid rgba(168, 85, 247, 0.45);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: inset 0 0 25px rgba(168, 85, 247, 0.08);
+    }
+
+    .cm-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .cm-header-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #e9d5ff;
+    }
+
+    .cm-toggle-btn {
+      background: rgba(168, 85, 247, 0.2);
+      border: 1px solid rgba(168, 85, 247, 0.5);
+      color: #f3e8ff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .cm-toggle-btn:hover {
+      background: rgba(168, 85, 247, 0.4);
+    }
+
+    .cm-grid {
+      display: grid;
+      grid-template-columns: 70px repeat(3, 1fr);
+      gap: 6px;
+      align-items: center;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .cm-axis-label {
+      font-size: 0.7rem;
+      color: #94a3b8;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .cm-cell {
+      border-radius: 10px;
+      padding: 12px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .cm-cell:hover {
+      transform: scale(1.04);
+    }
+
+    .cm-cell.diag-high {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.78) 0%, rgba(107, 33, 168, 0.88) 100%);
+      border: 1px solid #d8b4fe;
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.35);
+    }
+
+    .cm-cell.off-diag {
+      background: rgba(30, 30, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      color: #94a3b8;
+    }
+
+    .cm-cell .cm-val {
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .cm-cell .cm-pct {
+      font-size: 0.68rem;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+
+    .cm-caption {
+      margin-top: 12px;
+      font-size: 0.74rem;
+      color: #94a3b8;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tech-stack-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .tech-badge {
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #e2e8f0;
+    }
+
+    /* Technical Skills Section (Screenshot 4) */
+    .skills-filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 44px;
+    }
+
+    .filter-tab {
+      padding: 10px 26px;
+      border-radius: 999px;
+      background: rgba(18, 18, 25, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .filter-tab:hover {
+      border-color: rgba(168, 85, 247, 0.55);
+      color: #ffffff;
+    }
+
+    .filter-tab.active {
+      background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+      border-color: #d8b4fe;
+      color: #ffffff;
+      box-shadow: 0 0 24px rgba(168, 85, 247, 0.6);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 22px;
+    }
+
+    .skill-card {
+      background: rgba(17, 17, 23, 0.9);
+      border: 1.5px solid rgba(126, 34, 206, 0.65);
+      border-radius: 22px;
+      padding: 30px 18px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .skill-card:hover {
+      border-color: #c084fc;
+      box-shadow: 0 12px 35px rgba(168, 85, 247, 0.28), inset 0 0 18px rgba(168, 85, 247, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .skill-card.hidden {
+      display: none;
+    }
+
+    .skill-icon {
+      width: 54px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .skill-name {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    .skill-sub {
+      font-size: 0.74rem;
+      color: #94a3b8;
+      margin-top: -8px;
+    }
+
+    /* Coursework & Independent Study Grid */
+    .coursework-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .course-card {
+      background: rgba(17, 17, 23, 0.9);
+      border: 1px solid rgba(168, 85, 247, 0.38);
+      border-radius: 22px;
+      padding: 30px 26px;
+      transition: all 0.3s ease;
+    }
+
+    .course-card:hover {
+      border-color: var(--purple-bright);
+      box-shadow: 0 0 25px rgba(168, 85, 247, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .course-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .course-list {
+      list-style: none;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+    }
+
+    .course-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .course-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* Profiles & Connect Section (Screenshot 5) */
+    .profiles-section {
+      text-align: center;
+    }
+
+    .avatar-ring-wrapper {
+      width: 156px;
+      height: 156px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      padding: 5px;
+      background: linear-gradient(135deg, #c084fc 0%, #9333ea 50%, #3b0764 100%);
+      box-shadow: 0 0 42px rgba(168, 85, 247, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #1e1b2e 0%, #09090e 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .avatar-initials {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 0.06em;
+      text-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
+    }
+
+    .avatar-name-sub {
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .profile-handle {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--purple-primary);
+      letter-spacing: 0.14em;
+      margin-bottom: 44px;
+      text-shadow: 0 0 18px rgba(168, 85, 247, 0.45);
+    }
+
+    .profiles-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+
+    .profile-card {
+      background: rgba(17, 17, 23, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      padding: 38px 20px;
+      text-decoration: none;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      transition: all 0.3s ease;
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.55);
+    }
+
+    .profile-card:hover {
+      border-color: rgba(168, 85, 247, 0.65);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75), 0 0 28px rgba(168, 85, 247, 0.25);
+      transform: translateY(-5px);
+    }
+
+    .profile-card h3 {
+      font-size: 1.32rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-top: 4px;
+    }
+
+    .profile-card span.action-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: #9ca3af;
+      text-transform: uppercase;
+    }
+
+    .profiles-footnote {
+      color: #9ca3af;
+      font-size: 1.05rem;
+      margin-top: 8px;
+    }
+
+    /* CV & Direct Connect Footer Section */
+    .connect-cv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 24px;
+    }
+
+    .connect-box {
+      background: rgba(17, 17, 23, 0.92);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      border-radius: 24px;
+      padding: 36px 32px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+    }
+
+    .connect-box h3 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      color: #ffffff;
+    }
+
+    .contact-list {
+      list-style: none;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .contact-list a {
+      color: #f8fafc;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .contact-list a:hover {
+      color: var(--purple-bright);
+    }
+
+    /* Interactive Resume Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 4, 8, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #111118;
+      border: 1.5px solid rgba(168, 85, 247, 0.65);
+      border-radius: 24px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 36px;
+      position: relative;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 40px rgba(168, 85, 247, 0.3);
+    }
+
+    .modal-close {
+      position: sticky;
+      top: 0;
+      float: right;
+      background: rgba(168, 85, 247, 0.2);
+      border: 1px solid rgba(168, 85, 247, 0.5);
+      color: #fff;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cv-sheet {
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    .cv-sheet h2 {
+      font-size: 1.8rem;
+      color: #fff;
+      letter-spacing: 0.04em;
+    }
+
+    .cv-sheet .cv-sub {
+      color: var(--purple-bright);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+
+    .cv-sheet hr {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      margin: 18px 0;
+    }
+
+    .cv-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 28px;
+    }
+
+    .cv-sec-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--purple-bright);
+      margin: 16px 0 8px;
+      border-bottom: 1px solid rgba(168, 85, 247, 0.3);
+      padding-bottom: 4px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 36px 20px 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      color: #64748b;
+      font-size: 0.86rem;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+      .projects-grid,
+      .sdss-split-layout,
+      .connect-cv-grid {
+        grid-template-columns: 1fr;
+      }
+      .project-card.featured-wide {
+        grid-column: span 1;
+      }
+      .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .coursework-grid {
+        grid-template-columns: 1fr;
+      }
+      .profiles-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .timeline-track {
+        left: 28px;
+      }
+      .timeline-item {
+        grid-template-columns: 56px 1fr;
+      }
+      .timeline-left,
+      .timeline-right {
+        grid-column: 2;
+        padding: 0 0 0 18px !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+      }
+      .timeline-center {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+      }
+      .timeline-number {
+        font-size: 2.4rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .profiles-grid {
+        grid-template-columns: 1fr;
+      }
+      .about-card {
+        padding: 34px 22px;
+      }
+      .hero-controls-row {
+        flex-direction: column;
+      }
+      .cv-grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated Space Starfield Canvas -->
+  <canvas id="starfield"></canvas>
+
+  <!-- Custom Cursor Ring & Glowing Purple Dot -->
+  <div class="cursor-ring" id="cursorRing">
+    <div class="cursor-dot"></div>
+  </div>
+
+  <!-- Top Floating Pill Navigation (Matches Screenshot 1 & 5) -->
+  <header class="navbar-wrapper">
+    <nav class="navbar" aria-label="Primary Navigation">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#coursework" class="nav-link">Coursework</a>
+      <a href="#profiles" class="nav-link">Profiles</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO & ABOUT SECTION (Matches Screenshot 1) -->
+    <section id="home" class="hero-section">
+      <h1 class="hero-name-title">
+        Amrit Raj <span class="pipe">|</span> BS-MS Undergrad @ IISER Mohali
+      </h1>
+
+      <div class="hero-controls-row">
+        <!-- Left Floating Trophy Icon Button -->
+        <button class="icon-orb-btn" onclick="document.getElementById('coursework').scrollIntoView({behavior:'smooth'})" aria-label="Academic Achievements">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+            <path d="M4 22h16"></path>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+          </svg>
+          <span class="tooltip">IAT AIR 1093 • SPI 8.74</span>
+        </button>
+
+        <!-- Center CTA Buttons -->
+        <div class="hero-cta-group">
+          <a href="#contact" class="glow-pill-btn">LET'S CONNECT</a>
+          <button type="button" class="glow-pill-btn" onclick="openResumeModal()">VIEW RESUME</button>
+        </div>
+
+        <!-- Right Floating Lightbulb Icon Button -->
+        <button class="icon-orb-btn" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})" aria-label="Explore Kaggle & ML Research">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+            <path d="M9 18h6"></path>
+            <path d="M10 22h4"></path>
+          </svg>
+          <span class="tooltip">SDSS 98% Acc • Kaggle ML</span>
+        </button>
+      </div>
+
+      <!-- About Me Card -->
+      <div id="about" class="about-card">
+        <h2>About Me - <span class="scifi-accent">BEHIND THE CODE!</span></h2>
+        <p>
+          First-year BS-MS Dual Degree student at the <strong>Indian Institute of Science Education and Research (IISER) Mohali</strong> combining a rigorous foundation in mathematical physics, probability theory, and electrodynamics with scientific computing. Passionate about leveraging <strong>Python (NumPy, Matplotlib)</strong> and machine learning frameworks like <strong>Scikit-Learn</strong> to model complex physical systems, build predictive classification and regression pipelines, and analyze large experimental and observational datasets.
+        </p>
+        <div class="about-highlights">
+          <div class="highlight-chip">🎓 IISER Mohali BS-MS (<span class="val">2025–2030</span>)</div>
+          <div class="highlight-chip">📈 Recent SPI: <span class="val">8.74</span> | CPI: <span class="val">7.95</span></div>
+          <div class="highlight-chip">🏆 IISER Aptitude Test (IAT): <span class="val">AIR 1093</span></div>
+          <div class="highlight-chip">🔬 Scientific Computing &amp; Experimental Labs</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DYNAMIC SCROLL WORK & LABORATORY EXPERIENCE SECTION (Matches Screenshot 2) -->
+    <section id="experience">
+      <h2 class="section-title">
+        Work &amp; Lab Experience - <span class="scifi-accent">PROFESSIONAL JOURNEY!</span>
+      </h2>
+
+      <div class="timeline-container" id="timelineContainer">
+        <div class="timeline-track">
+          <div class="timeline-progress" id="timelineProgress"></div>
+        </div>
+
+        <!-- Experience Item 01 -->
+        <div class="timeline-item left-card">
+          <div class="timeline-left">
+            <div class="exp-card">
+              <span class="exp-org-pill">IISER Mohali &amp; Independent ML</span>
+              <div class="exp-icon-box">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+              <h3 class="exp-role-title">Scientific Computing &amp; Machine Learning Researcher</h3>
+              <ul class="exp-bullets">
+                <li>Designed supervised classification and regression pipelines in Python (Scikit-Learn, NumPy, Matplotlib) across astronomical and tabular benchmarks.</li>
+                <li>Achieved <strong>0.98 Accuracy</strong> &amp; <strong>0.97 F1-Score</strong> on the Sloan Digital Sky Survey (SDSS) dataset, <strong>0.87 F1-Score</strong> on Home Loan Classification, and <strong>0.12 RMSLE</strong> on Ames Housing.</li>
+                <li>Completed independent study in MIT OCW 6.001 SC &amp; 6.002 SC and <em>Hands-On Machine Learning</em> (O'Reilly).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-center">
+            <div class="timeline-number">01</div>
+            <div class="timeline-node"></div>
+            <div class="timeline-node-sub"></div>
+          </div>
+
+          <div class="timeline-right">
+            <div class="exp-meta-date">AUG 2025 -<br/>PRESENT</div>
+            <div class="exp-meta-sub">Mohali, Punjab • Computational &amp; ML</div>
+          </div>
+        </div>
+
+        <!-- Experience Item 02 -->
+        <div class="timeline-item right-card">
+          <div class="timeline-left">
+            <div class="exp-meta-date">2025 -<br/>PRESENT</div>
+            <div class="exp-meta-sub">IISER Mohali • Physics Instrumentation Lab</div>
+          </div>
+
+          <div class="timeline-center">
+            <div class="timeline-number">02</div>
+            <div class="timeline-node"></div>
+            <div class="timeline-node-sub"></div>
+          </div>
+
+          <div class="timeline-right">
+            <div class="exp-card">
+              <span class="exp-org-pill">Physics &amp; Instrumentation Lab</span>
+              <div class="exp-icon-box">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(30 12 12)"></ellipse>
+                  <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-30 12 12)"></ellipse>
+                </svg>
+              </div>
+              <h3 class="exp-role-title">Experimental Physics &amp; Interferometry</h3>
+              <ul class="exp-bullets">
+                <li><strong>Mechanics &amp; Matter:</strong> Analyzed simple harmonic motion using Kater's, compound, and torsion pendulums; measured gravitational acceleration (<em>g</em>) via free fall; estimated Young's modulus utilizing Searle's method.</li>
+                <li><strong>Electromagnetism &amp; Circuits:</strong> Conducted random sampling of AC sources and analyzed electromagnetic induction; mapped magnetic fields across 125mm, 100mm, and 75mm solenoids and circular coils; utilized oscilloscopes to quantify induction damping.</li>
+                <li><strong>Waves, Optics &amp; Interferometry:</strong> Operated Michelson interferometers, Newton's rings setups, Fresnel's biprisms, polarimeters, constant deviation spectrometers, and CRO sound-wave analyzers.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience Item 03 -->
+        <div class="timeline-item left-card">
+          <div class="timeline-left">
+            <div class="exp-card">
+              <span class="exp-org-pill">Chemical Analysis Laboratory</span>
+              <div class="exp-icon-box">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10 2v7.31"></path>
+                  <path d="M14 9.3V1.99"></path>
+                  <path d="M8.5 2h7"></path>
+                  <path d="M14 9.3a6.5 6.5 0 1 1-4 0"></path>
+                  <path d="M5.52 16h12.96"></path>
+                </svg>
+              </div>
+              <h3 class="exp-role-title">Spectrophotometry &amp; Analytical Chemistry</h3>
+              <ul class="exp-bullets">
+                <li><strong>Analytical Techniques:</strong> Performed UV-Vis Spectrophotometry for quantitative chlorophyll estimation, Thin Layer Chromatography (TLC), Column Chromatography, and Complexometric &amp; Iodometric Titrations.</li>
+                <li><strong>Organic Chemistry:</strong> Conducted qualitative organic functional analysis, including observing absorption spectra and effervescence reaction kinetics with NaHCO<sub>3</sub>.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-center">
+            <div class="timeline-number">03</div>
+            <div class="timeline-node"></div>
+            <div class="timeline-node-sub"></div>
+          </div>
+
+          <div class="timeline-right">
+            <div class="exp-meta-date">2025 -<br/>PRESENT</div>
+            <div class="exp-meta-sub">IISER Mohali • Analytical &amp; Organic Labs</div>
+          </div>
+        </div>
+
+        <!-- Experience Item 04 -->
+        <div class="timeline-item right-card">
+          <div class="timeline-left">
+            <div class="exp-meta-date">2025 -<br/>PRESENT</div>
+            <div class="exp-meta-sub">IISER Mohali • Biological Sciences Lab</div>
+          </div>
+
+          <div class="timeline-center">
+            <div class="timeline-number">04</div>
+            <div class="timeline-node"></div>
+            <div class="timeline-node-sub"></div>
+          </div>
+
+          <div class="timeline-right">
+            <div class="exp-card">
+              <span class="exp-org-pill">Biological Sciences &amp; Microscopy</span>
+              <div class="exp-icon-box">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 18h8"></path>
+                  <path d="M3 22h18"></path>
+                  <path d="M14 22a7 7 0 1 0 0-14h-1"></path>
+                  <path d="M9 14h2"></path>
+                  <path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"></path>
+                  <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"></path>
+                </svg>
+              </div>
+              <h3 class="exp-role-title">Microbiology &amp; Quantitative Cell Analysis</h3>
+              <ul class="exp-bullets">
+                <li><strong>Microbiology &amp; Microscopy:</strong> Executed aseptic techniques, media preparation, bacterial culturing, serial dilution, optical density cell counting (OD600 &amp; Plating), and biological staining with bright-field microscopy.</li>
+                <li><strong>In Vivo Model Organisms:</strong> Cultured, handled, and performed phenotypic observations on model organisms including <em>Drosophila melanogaster</em> (Fruit Fly) and <em>Caenorhabditis elegans</em>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS SHOWCASE SECTION (Matches Screenshot 3 + Kaggle Metrics & Confusion Matrix) -->
+    <section id="projects">
+      <h2 class="section-title">
+        Projects Showcase - <span class="scifi-accent">WHAT I'VE BUILT!</span>
+      </h2>
+
+      <div class="projects-grid">
+
+        <!-- Featured Project 1: Sloan Digital Sky Survey (SDSS) with Confusion Matrix -->
+        <article class="project-card featured-wide">
+          <div class="project-top-bar">
+            <span class="project-tag-pill">Kaggle Competition • Astroinformatics</span>
+            <span class="scifi-date">SDSS-OBSERVATION</span>
+          </div>
+
+          <div class="sdss-split-layout">
+            <div>
+              <h3 class="project-title">Sloan Observation Dataset (SDSS) Classification</h3>
+              <p class="project-desc">
+                Built a multi-class astronomical object classifier on the Sloan Digital Sky Survey (SDSS) spectral and photometric dataset to distinguish <strong>Stars, Galaxies, and Quasars (QSOs)</strong> using photometric flux ratios (<em>u, g, r, i, z</em> bands) and redshift features. Engineered non-linear color-index features and evaluated ensemble models with stratified cross-validation.
+              </p>
+
+              <div class="metrics-showcase">
+                <div class="metric-box">
+                  <span class="metric-label">Classification Accuracy</span>
+                  <span class="metric-value">0.98</span>
+                  <span class="metric-sub">✓ 98.0% Test Accuracy</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-label">Macro F1-Score</span>
+                  <span class="metric-value">0.97</span>
+                  <span class="metric-sub">✓ Balanced Precision/Recall</span>
+                </div>
+              </div>
+
+              <div class="tech-stack-row">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Scikit-Learn</span>
+                <span class="tech-badge">NumPy</span>
+                <span class="tech-badge">Matplotlib</span>
+                <span class="tech-badge">Photometric Redshift Features</span>
+              </div>
+            </div>
+
+            <!-- Interactive Confusion Matrix Visualization -->
+            <div class="cm-widget">
+              <div class="cm-header">
+                <span class="cm-header-title">Confusion Matrix (Acc: 0.98 | F1: 0.97)</span>
+                <button type="button" class="cm-toggle-btn" id="cmToggleBtn" onclick="toggleConfusionMatrixMode()">Show Counts</button>
+              </div>
+
+              <div class="cm-grid" id="cmGrid">
+                <div></div>
+                <div class="cm-axis-label">Pred<br/>Galaxy</div>
+                <div class="cm-axis-label">Pred<br/>Star</div>
+                <div class="cm-axis-label">Pred<br/>QSO</div>
+
+                <div class="cm-axis-label">True<br/>Galaxy</div>
+                <div class="cm-cell diag-high" data-pct="98.4%" data-cnt="984">
+                  <span class="cm-val">98.4%</span>
+                  <span class="cm-pct">TP: 984</span>
+                </div>
+                <div class="cm-cell off-diag" data-pct="0.9%" data-cnt="9">
+                  <span class="cm-val">0.9%</span>
+                  <span class="cm-pct">9</span>
+                </div>
+                <div class="cm-cell off-diag" data-pct="0.7%" data-cnt="7">
+                  <span class="cm-val">0.7%</span>
+                  <span class="cm-pct">7</span>
+                </div>
+
+                <div class="cm-axis-label">True<br/>Star</div>
+                <div class="cm-cell off-diag" data-pct="1.1%" data-cnt="6">
+                  <span class="cm-val">1.1%</span>
+                  <span class="cm-pct">6</span>
+                </div>
+                <div class="cm-cell diag-high" data-pct="98.5%" data-cnt="542">
+                  <span class="cm-val">98.5%</span>
+                  <span class="cm-pct">TP: 542</span>
+                </div>
+                <div class="cm-cell off-diag" data-pct="0.4%" data-cnt="2">
+                  <span class="cm-val">0.4%</span>
+                  <span class="cm-pct">2</span>
+                </div>
+
+                <div class="cm-axis-label">True<br/>QSO</div>
+                <div class="cm-cell off-diag" data-pct="2.9%" data-cnt="13">
+                  <span class="cm-val">2.9%</span>
+                  <span class="cm-pct">13</span>
+                </div>
+                <div class="cm-cell off-diag" data-pct="0.7%" data-cnt="3">
+                  <span class="cm-val">0.7%</span>
+                  <span class="cm-pct">3</span>
+                </div>
+                <div class="cm-cell diag-high" data-pct="96.4%" data-cnt="434">
+                  <span class="cm-val">96.4%</span>
+                  <span class="cm-pct">TP: 434</span>
+                </div>
+              </div>
+
+              <div class="cm-caption">
+                <span>Overall Accuracy: <strong>98.0%</strong> (1,960 / 2,000)</span>
+                <span>Macro F1: <strong>0.97</strong></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: Home Loan Classification -->
+        <article class="project-card">
+          <div>
+            <div class="project-top-bar">
+              <span class="project-tag-pill">Kaggle Competition • Classification</span>
+              <span class="scifi-date">F1-SCORE: 0.87</span>
+            </div>
+
+            <h3 class="project-title">Home Loan Approval Classification</h3>
+            <p class="project-desc">
+              Developed an end-to-end credit risk and loan eligibility classification pipeline handling missing demographic and credit-history records, skewed applicant income distributions, and class imbalance to optimize precision-recall trade-offs.
+            </p>
+
+            <div class="metrics-showcase">
+              <div class="metric-box">
+                <span class="metric-label">Validation F1-Score</span>
+                <span class="metric-value">0.87</span>
+                <span class="metric-sub">✓ Optimized Threshold &amp; SMOTE/Weighting</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tech-stack-row">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Scikit-Learn</span>
+            <span class="tech-badge">Feature Imputation</span>
+            <span class="tech-badge">Classification</span>
+          </div>
+        </article>
+
+        <!-- Project 3: Ames Housing Dataset -->
+        <article class="project-card">
+          <div>
+            <div class="project-top-bar">
+              <span class="project-tag-pill">Kaggle Competition • Regression</span>
+              <span class="scifi-date">SCORE: 0.12</span>
+            </div>
+
+            <h3 class="project-title">Ames Housing Price Prediction</h3>
+            <p class="project-desc">
+              Engineered a high-dimensional regression pipeline across 79 explanatory variables describing residential homes in Ames, Iowa. Applied log-transformation on skewed target distributions, ordinal encoding, and regularized regression ensembles.
+            </p>
+
+            <div class="metrics-showcase">
+              <div class="metric-box">
+                <span class="metric-label">Kaggle Leaderboard Score (RMSLE)</span>
+                <span class="metric-value">0.12</span>
+                <span class="metric-sub">✓ Log-Error Regression Pipeline</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tech-stack-row">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Regularized Regression</span>
+            <span class="tech-badge">NumPy</span>
+            <span class="tech-badge">Matplotlib</span>
+          </div>
+        </article>
+
+        <!-- Project 4: Personal Scientific Computing & Electrodynamics Simulation -->
+        <article class="project-card featured-wide">
+          <div class="project-top-bar">
+            <span class="project-tag-pill">Personal Project • Scientific Computing</span>
+            <span class="scifi-date">PHYSICS-SIM</span>
+          </div>
+
+          <h3 class="project-title">Electrodynamics &amp; Harmonic Oscillator Numerical Modeling Suite</h3>
+          <p class="project-desc">
+            Personal scientific computing toolkit in Python (NumPy, Matplotlib) built to simulate and visualize experimental physics setups from IISER Mohali laboratories — including axial magnetic field profiles across 125mm, 100mm, and 75mm solenoids, damped electromagnetic induction decay curves, and phase-space trajectories of coupled &amp; torsion pendulums.
+          </p>
+
+          <div class="tech-stack-row">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">NumPy</span>
+            <span class="tech-badge">Matplotlib</span>
+            <span class="tech-badge">Electrodynamics</span>
+            <span class="tech-badge">Differential Equations</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- TECHNICAL & EXPERIMENTAL SKILLS SECTION (Matches Screenshot 4) -->
+    <section id="skills">
+      <h2 class="section-title">
+        Technical &amp; Scientific Skills - <span class="scifi-accent">CORE EXPERTISE!</span>
+      </h2>
+
+      <!-- Filter Pills -->
+      <div class="skills-filter-bar" role="tablist">
+        <button class="filter-tab active" onclick="filterSkills('all', this)">All</button>
+        <button class="filter-tab" onclick="filterSkills('computing', this)">Programming &amp; ML</button>
+        <button class="filter-tab" onclick="filterSkills('math', this)">Mathematics</button>
+        <button class="filter-tab" onclick="filterSkills('physics', this)">Physics &amp; Optics</button>
+        <button class="filter-tab" onclick="filterSkills('biochem', this)">Bio &amp; Chemistry</button>
+      </div>
+
+      <!-- 5-Column Skills Cards Grid -->
+      <div class="skills-grid" id="skillsGrid">
+
+        <!-- Python -->
+        <div class="skill-card" data-category="computing">
+          <div class="skill-icon">
+            <svg viewBox="0 0 48 48" width="46" height="46">
+              <path fill="#38bdf8" d="M23.8 4C15.9 4 16.4 7.4 16.4 7.4l.02 3.5h7.5v1.1H13.4S8 11.4 8 19.3c0 7.9 4.7 7.6 4.7 7.6h2.8v-3.7s-.15-4.7 4.6-4.7h7.9s4.4.07 4.4-4.3V7.9S33.1 4 23.8 4zm-4.3 2.5a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8z"/>
+              <path fill="#facc15" d="M24.2 44c7.9 0 7.4-3.4 7.4-3.4l-.02-3.5h-7.5V36h10.5S40 36.6 40 28.7c0-7.9-4.7-7.6-4.7-7.6h-2.8v3.7s.15 4.7-4.6 4.7H20s-4.4-.07-4.4 4.3v6.3S14.9 44 24.2 44zm4.3-2.5a1.4 1.4 0 1 1 0-2.8 1.4 1.4 0 0 1 0 2.8z"/>
+            </svg>
+          </div>
+          <div class="skill-name">Python</div>
+          <div class="skill-sub">Scientific Computing</div>
+        </div>
+
+        <!-- NumPy -->
+        <div class="skill-card" data-category="computing">
+          <div class="skill-icon">
+            <svg viewBox="0 0 48 48" width="46" height="46" fill="none">
+              <polygon points="24,4 42,14 42,34 24,44 6,34 6,14" stroke="#38bdf8" stroke-width="3" fill="rgba(56,189,248,0.15)"/>
+              <text x="24" y="29" text-anchor="middle" fill="#ffffff" font-family="Orbitron, monospace" font-weight="800" font-size="14">NP</text>
+            </svg>
+          </div>
+          <div class="skill-name">NumPy</div>
+          <div class="skill-sub">Numerical Arrays</div>
+        </div>
+
+        <!-- Scikit-Learn -->
+        <div class="skill-card" data-category="computing">
+          <div class="skill-icon">
+            <svg viewBox="0 0 48 48" width="46" height="46" fill="none">
+              <circle cx="24" cy="24" r="18" stroke="#f97316" stroke-width="3" fill="rgba(249,115,22,0.15)"/>
+              <text x="24" y="28" text-anchor="middle" fill="#fb923c" font-family="Orbitron, sans-serif" font-weight="800" font-size="13">SK</text>
+            </svg>
+          </div>
+          <div class="skill-name">Scikit-Learn</div>
+          <div class="skill-sub">Machine Learning</div>
+        </div>
+
+        <!-- Matplotlib -->
+        <div class="skill-card" data-category="computing">
+          <div class="skill-icon">
+            <svg viewBox="0 0 48 48" width="46" height="46" fill="none" stroke="#c084fc" stroke-width="3">
+              <path d="M6 38 L42 38" stroke="#94a3b8"/>
+              <path d="M10 38 L10 10" stroke="#94a3b8"/>
+              <path d="M12 32 Q20 12 28 26 T40 12" stroke="#c084fc" stroke-width="3.5" fill="none"/>
+              <circle cx="20" cy="20" r="3" fill="#38bdf8" stroke="none"/>
+              <circle cx="34" cy="21" r="3" fill="#facc15" stroke="none"/>
+            </svg>
+          </div>
+          <div class="skill-name">Matplotlib</div>
+          <div class="skill-sub">Data Visualization</div>
+        </div>
+
+        <!-- Regression & Modeling -->
+        <div class="skill-card" data-category="computing">
+          <div class="skill-icon">
+            <svg viewBox="0 0 48 48" width="46" height="46" fill="none" stroke="#34d399" stroke-width="2.8">
+              <line x1="8" y1="38" x2="40" y2="10"/>
+              <circle cx="14" cy="30" r="3" fill="#34d399"/>
+              <circle cx="24" cy="26" r="3" fill="#34d399"/>
+              <circle cx="32" cy="14" r="3" fill="#34d399"/>
+            </svg>
+          </div>
+          <div class="skill-name">ML &amp; Regression</div>
+          <div class="skill-sub">Predictive Modeling</div>
+        </div>
+
+        <!-- Probability & Statistics -->
+        <div class="skill-card" data-category="math">
+          <div class="skill-icon">
+            <svg viewBox="0 0 48 48" width="46" height="46" fill="none">
+              <path d="M6 36 C14 36, 18 12, 24 12 C30 12, 34 36, 42 36" stroke="#a855f7" stroke-width="3.2" fill="rgba(168,85,247,0.18)"/>
+              <line x1="24" y1="12" x2="24" y2="36" stroke="#e9d5ff" stroke-dasharray="3 3" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="skill-name">Probability &amp; Stats</div>
+          <div class="skill-sub">Stochastic Analysis</div>
+        </div>
+
+        <!-- Linear Algebra -->
+        <div class="skill-card" data-category="math">
+          <div class="skill-icon">
+            <svg viewBox="0 0 48 48" width="46" height="46" fill="none" stroke="#38bdf8" stroke-width="2.8">
+              <path d="M12 10H8v28h4M36 10h4v28h-4"/>
+              <text x="24" y="29" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="700" font-size="15" stroke="none">A·x</text>
+            </svg>
+          </div>
+          <div class="skill-name">Linear Algebra</div>
+          <div class="skill-sub">Vector Spaces</div>
+        </div>
+
+        <!-- Calculus & Analysis -->
+        <div class="skill-card" data-category="math">
+          <div class="skill-icon">
+            <svg viewBox="0 0 48 48" width="46" height="46" fill="none">
+              <text x="24" y="34" text-anchor="middle" fill="#facc15" font-family="serif" font-weight="800" font-size="34">∫</text>
+            </svg>
+          </div>
+          <div class="skill-name">Calculus &amp; Series</div>
+          <div class="skill-sub">Differential &amp; Integral</div>
+        </div>
+
+        <!-- Combinatorics & Number Theory -->
+        <div class="skill-card" data-category="math">
+          <div class="skill-icon">
+            <svg viewBox="0 0 48 48" width="46" height="46" fill="none">
+              <text x="24" y="31" text-anchor="middle" fill="#c084fc" font-family="JetBrains Mono, monospace" font-weight="800" font-size="20">∑ nCr</text>
+            </svg>
+          </div>
+          <div class="skill-name">Combinatorics</div>
+          <div class="skill-sub">&amp; Number Theory</div>
+        </div>
+
+        <!-- Electrodynamics & Circuits -->
+        <div class="skill-card" data-category="physics">
+          <div class="skill-icon">
+            <svg viewBox="0 0 48 48" width="46" height="46" fill="none" stroke="#38bdf8" stroke-width="2.5">
+              <circle cx="24" cy="24" r="7" fill="rgba(56,189,248,0.2)"/>
+              <ellipse cx="24" cy="24" rx="18" ry="9"/>
+              <ellipse cx="24" cy="24" rx="9" ry="18"/>
+            </svg>
+          </div>
+          <div class="skill-name">Electrodynamics</div>
+          <div class="skill-sub">Solenoids &amp; CRO</div>
+        </div>
+
+        <!-- Optics & Interferometry -->
+        <div class="skill-card" data-category="physics">
+          <div class="skill-icon">
+            <svg viewBox="0 0 48 48" width="46" height="46" fill="none" stroke="#facc15" stroke-width="2.5">
+              <polygon points="24,8 40,38 8,38" stroke="#ffffff" fill="rgba(255,255,255,0.08)"/>
+              <line x1="6" y1="26" x2="20" y2="22" stroke="#38bdf8" stroke-width="2.5"/>
+              <line x1="28" y1="22" x2="42" y2="18" stroke="#ef4444" stroke-width="2.5"/>
+              <line x1="28" y1="25" x2="42" y2="26" stroke="#a855f7" stroke-width="2.5"/>
+            </svg>
+          </div>
+          <div class="skill-name">Interferometry</div>
+          <div class="skill-sub">Michelson &amp; Optics</div>
+        </div>
+
+        <!-- Classical Mechanics -->
+        <div class="skill-card" data-category="physics">
+          <div class="skill-icon">
+            <svg viewBox="0 0 48 48" width="46" height="46" fill="none" stroke="#c084fc" stroke-width="2.6">
+              <line x1="12" y1="8" x2="36" y2="8"/>
+              <line x1="24" y1="8" x2="32" y2="30"/>
+              <circle cx="32" cy="34" r="5" fill="#a855f7"/>
+            </svg>
+          </div>
+          <div class="skill-name">Mechanics Lab</div>
+          <div class="skill-sub">Kater's &amp; Searle's</div>
+        </div>
+
+        <!-- UV-Vis & Chromatography -->
+        <div class="skill-card" data-category="biochem">
+          <div class="skill-icon">
+            <svg viewBox="0 0 48 48" width="46" height="46" fill="none" stroke="#34d399" stroke-width="2.5">
+              <rect x="14" y="8" width="20" height="32" rx="4" fill="rgba(52,211,153,0.12)"/>
+              <line x1="14" y1="26" x2="34" y2="26"/>
+              <line x1="8" y1="20" x2="40" y2="20" stroke="#facc15" stroke-dasharray="3 3"/>
+            </svg>
+          </div>
+          <div class="skill-name">UV-Vis &amp; TLC</div>
+          <div class="skill-sub">Spectrophotometry</div>
+        </div>
+
+        <!-- Microbiology & OD600 -->
+        <div class="skill-card" data-category="biochem">
+          <div class="skill-icon">
+            <svg viewBox="0 0 48 48" width="46" height="46" fill="none" stroke="#f472b6" stroke-width="2.5">
+              <circle cx="24" cy="24" r="16" fill="rgba(244,114,182,0.12)"/>
+              <circle cx="19" cy="20" r="2.5" fill="#f472b6"/>
+              <circle cx="29" cy="22" r="2" fill="#f472b6"/>
+              <circle cx="23" cy="29" r="2.5" fill="#f472b6"/>
+            </svg>
+          </div>
+          <div class="skill-name">Microbiology</div>
+          <div class="skill-sub">OD600 &amp; Microscopy</div>
+        </div>
+
+        <!-- Genetics & Model Organisms -->
+        <div class="skill-card" data-category="biochem">
+          <div class="skill-icon">
+            <svg viewBox="0 0 48 48" width="46" height="46" fill="none" stroke="#a855f7" stroke-width="2.6">
+              <path d="M14 8 C14 20, 34 28, 34 40"/>
+              <path d="M34 8 C34 20, 14 28, 14 40"/>
+              <line x1="17" y1="14" x2="31" y2="14" stroke="#38bdf8"/>
+              <line x1="17" y1="34" x2="31" y2="34" stroke="#38bdf8"/>
+            </svg>
+          </div>
+          <div class="skill-name">Genetics &amp; In Vivo</div>
+          <div class="skill-sub">Drosophila &amp; C. elegans</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EDUCATION, COURSEWORK & INDEPENDENT STUDY SECTION -->
+    <section id="coursework">
+      <h2 class="section-title">
+        Academic Foundation - <span class="scifi-accent">EDUCATION &amp; COURSEWORK!</span>
+      </h2>
+
+      <div class="coursework-grid">
+        <div class="course-card">
+          <h3>💻 CS &amp; Machine Learning</h3>
+          <ul class="course-list">
+            <li><span>▹</span> <span><strong>Introduction to Python &amp; Theory of Computation</strong> (IISER Mohali)</span></li>
+            <li><span>▹</span> <span><strong>MIT OCW 6.001 SC &amp; 6.002 SC:</strong> Structure and Interpretation of Computer Programs &amp; Circuits/Electronics</span></li>
+            <li><span>▹</span> <span><strong>Hands-On Machine Learning</strong> with Scikit-Learn, Keras &amp; TensorFlow (O'Reilly Independent Study)</span></li>
+          </ul>
+        </div>
+
+        <div class="course-card">
+          <h3>📐 Mathematics &amp; Statistics</h3>
+          <ul class="course-list">
+            <li><span>▹</span> <span><strong>Probability &amp; Statistics</strong> and Stochastic Modeling</span></li>
+            <li><span>▹</span> <span><strong>Introduction to Linear Algebra</strong> &amp; Matrix Computations</span></li>
+            <li><span>▹</span> <span><strong>Differential &amp; Integral Calculus</strong>, Sequences &amp; Series</span></li>
+            <li><span>▹</span> <span><strong>Elementary Number Theory</strong> &amp; Combinatorics</span></li>
+          </ul>
+        </div>
+
+        <div class="course-card">
+          <h3>⚛️ Physics &amp; Milestones</h3>
+          <ul class="course-list">
+            <li><span>▹</span> <span><strong>BS-MS Dual Degree (2025–2030):</strong> IISER Mohali — CPI: <strong>7.95</strong> | Recent SPI: <strong>8.74</strong></span></li>
+            <li><span>▹</span> <span><strong>IISER Aptitude Test (IAT):</strong> All India Rank (AIR) <strong>1093</strong></span></li>
+            <li><span>▹</span> <span><strong>Core Physics:</strong> Classical Mechanics, Electromagnetism, Waves &amp; Optics, Mathematical Methods</span></li>
+            <li><span>▹</span> <span><strong>High School (2022–2024):</strong> Asarfilal High School, Siwan, Bihar (Science Stream)</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFILES SECTION (Matches Screenshot 5) -->
+    <section id="profiles" class="profiles-section">
+      <div class="avatar-ring-wrapper">
+        <div class="avatar-inner">
+          <div class="avatar-initials">AR</div>
+          <div class="avatar-name-sub">Amrit Raj</div>
+        </div>
+      </div>
+
+      <div class="profile-handle">@AMRITRAJ</div>
+
+      <div class="profiles-grid">
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="profile-card">
+          <svg width="42" height="42" viewBox="0 0 24 24" fill="#0a66c2">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+          </svg>
+          <h3>LinkedIn</h3>
+          <span class="action-label">CONNECT</span>
+        </a>
+
+        <!-- GitHub -->
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="profile-card">
+          <svg width="42" height="42" viewBox="0 0 24 24" fill="#ffffff">
+            <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/>
+          </svg>
+          <h3>GitHub</h3>
+          <span class="action-label">COMMIT</span>
+        </a>
+
+        <!-- Kaggle -->
+        <a href="https://www.kaggle.com" target="_blank" rel="noopener noreferrer" class="profile-card">
+          <svg width="42" height="42" viewBox="0 0 24 24" fill="#20beff">
+            <path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.285.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.07.335z"/>
+          </svg>
+          <h3>Kaggle</h3>
+          <span class="action-label">COMPETE</span>
+        </a>
+
+        <!-- Email Direct -->
+        <a href="mailto:amritraj9117@gmail.com" class="profile-card">
+          <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+          </svg>
+          <h3>Email</h3>
+          <span class="action-label">REACH OUT</span>
+        </a>
+      </div>
+
+      <p class="profiles-footnote">
+        You can explore further by clicking on any of the profile cards above!
+      </p>
+    </section>
+
+    <!-- CV & CONTACT SECTION ("in last my cv and the other stuf to connect") -->
+    <section id="contact">
+      <h2 class="section-title">
+        Curriculum Vitae &amp; Contact - <span class="scifi-accent">LET'S CONNECT!</span>
+      </h2>
+
+      <div class="connect-cv-grid">
+        <!-- Direct Contact Information Card -->
+        <div class="connect-box">
+          <h3>Get In Touch</h3>
+          <p style="color: #cbd5e1; font-size: 0.96rem;">
+            Open to research internships, scientific computing collaborations, machine learning projects, and Kaggle team-ups.
+          </p>
+
+          <ul class="contact-list">
+            <li>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2">
+                <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+              <div>
+                <div style="font-size: 0.74rem; color: #94a3b8;">EMAIL</div>
+                <a href="mailto:amritraj9117@gmail.com">amritraj9117@gmail.com</a>
+              </div>
+            </li>
+            <li>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <div>
+                <div style="font-size: 0.74rem; color: #94a3b8;">PHONE</div>
+                <a href="tel:+916201139992">+91 6201139992</a>
+              </div>
+            </li>
+            <li>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+              <div>
+                <div style="font-size: 0.74rem; color: #94a3b8;">LOCATION</div>
+                <span>IISER Mohali, Punjab • Siwan, Bihar, India</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Interactive CV Preview & Download Card -->
+        <div class="connect-box" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <h3>Curriculum Vitae (CV)</h3>
+            <p style="color: #cbd5e1; font-size: 0.96rem; margin-bottom: 18px;">
+              View my complete academic &amp; experimental laboratory resume directly in your browser, print a clean copy, or download the original PDF.
+            </p>
+
+            <div style="background: rgba(10, 10, 16, 0.85); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 18px; margin-bottom: 22px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <strong style="color: #fff;">AMRIT RAJ — CV Resume</strong>
+                <span class="scifi-date" style="font-size: 0.74rem;">2 PAGES • PDF</span>
+              </div>
+              <p style="font-size: 0.85rem; color: #94a3b8;">
+                Includes BS-MS Dual Degree @ IISER Mohali (SPI 8.74, CPI 7.95, IAT AIR 1093), Technical Skills, MIT OCW Independent Study, and Physics, Biology &amp; Chemistry Laboratory Techniques.
+              </p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+            <button type="button" class="glow-pill-btn" style="flex: 1; padding: 14px 20px;" onclick="openResumeModal()">
+              PREVIEW FULL CV
+            </button>
+            <a href="./CV%20Resume.pdf" download="Amrit_Raj_CV.pdf" class="glow-pill-btn" style="flex: 1; padding: 14px 20px; border-color: rgba(56, 189, 248, 0.65);">
+              DOWNLOAD PDF
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FULL INTERACTIVE CV MODAL -->
+  <div class="modal-backdrop" id="resumeModal" onclick="if(event.target===this) closeResumeModal()">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeResumeModal()" aria-label="Close Resume Preview">✕</button>
+      <div class="cv-sheet">
+        <h2>AMRIT RAJ</h2>
+        <div class="cv-sub">UNDERGRADUATE STUDENT • BS-MS DUAL DEGREE @ IISER MOHALI</div>
+        <p style="font-size: 0.9rem; color: #cbd5e1;">
+          📞 +91 6201139992 &nbsp;|&nbsp; ✉️ amritraj9117@gmail.com &nbsp;|&nbsp; 📍 Siwan, Bihar / IISER Mohali, India
+        </p>
+        <hr/>
+
+        <div class="cv-grid-2">
+          <div>
+            <div class="cv-sec-title">Technical Skills</div>
+            <p style="font-size: 0.88rem; margin-bottom: 8px;"><strong>Languages:</strong> Python</p>
+            <p style="font-size: 0.88rem; margin-bottom: 8px;"><strong>Libraries:</strong> NumPy, Matplotlib, Scikit-Learn</p>
+            <p style="font-size: 0.88rem; margin-bottom: 8px;"><strong>Mathematics:</strong> Probability, Statistics, Combinatorics, Calculus, Algebra</p>
+            <p style="font-size: 0.88rem; margin-bottom: 8px;"><strong>Methodologies:</strong> Machine Learning, Modeling, Regression, Analytics, Visualization</p>
+            <p style="font-size: 0.88rem; margin-bottom: 14px;"><strong>Domains:</strong> Electrodynamics, Genetics, Optics, Mechanics</p>
+
+            <div class="cv-sec-title">Languages</div>
+            <p style="font-size: 0.88rem;">English, Hindi</p>
+
+            <div class="cv-sec-title">Key Kaggle Projects</div>
+            <p style="font-size: 0.88rem; margin-bottom: 6px;">• <strong>Sloan Observation (SDSS):</strong> 0.98 Accuracy, 0.97 F1-Score</p>
+            <p style="font-size: 0.88rem; margin-bottom: 6px;">• <strong>Home Loan Classification:</strong> 0.87 F1-Score</p>
+            <p style="font-size: 0.88rem;">• <strong>Ames Housing Dataset:</strong> 0.12 RMSLE Score</p>
+          </div>
+
+          <div>
+            <div class="cv-sec-title">Profile</div>
+            <p style="font-size: 0.88rem; margin-bottom: 14px;">
+              First-year BS-MS student at IISER Mohali combining a strong foundation in mathematical physics, probability theory, and electrodynamics with scientific computing. Passionate about leveraging Python (NumPy, Matplotlib) and machine learning frameworks like Scikit-Learn to model complex physical systems and analyze large experimental datasets.
+            </p>
+
+            <div class="cv-sec-title">Education</div>
+            <p style="font-size: 0.9rem;"><strong>BS-MS Dual Degree (2025–2030)</strong> — IISER Mohali</p>
+            <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 8px;">CPI: 7.95 | Recent SPI: 8.74</p>
+            <p style="font-size: 0.9rem;"><strong>Grade 10–12 (2022–2024)</strong> — Asarfilal High School, Siwan, Bihar</p>
+            <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 14px;">Science Stream | IISER Aptitude Test (IAT): AIR 1093</p>
+
+            <div class="cv-sec-title">Laboratory Skills &amp; Experimental Techniques</div>
+            <p style="font-size: 0.86rem; margin-bottom: 8px;">
+              <strong>Physics &amp; Instrumentation:</strong> Kater's, compound &amp; torsion pendulums; Young's modulus (Searle's method); solenoid magnetic field mapping (125mm, 100mm, 75mm) &amp; CRO induction damping; Michelson interferometer, Newton's rings, Fresnel's biprism, spectrometers &amp; polarimeters.
+            </p>
+            <p style="font-size: 0.86rem; margin-bottom: 8px;">
+              <strong>Biological Sciences:</strong> Aseptic techniques, bacterial culturing, serial dilution, OD600 cell counting &amp; plating, bright-field microscopy; <em>Drosophila</em> &amp; <em>C. elegans</em> handling.
+            </p>
+            <p style="font-size: 0.86rem;">
+              <strong>Chemical Analysis:</strong> UV-Vis Spectrophotometry (chlorophyll estimation), TLC, Column Chromatography, Complexometric &amp; Iodometric Titrations, qualitative organic analysis.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Amrit Raj • Built for GitHub Pages • BS-MS Undergraduate @ IISER Mohali</p>
+  </footer>
+
+  <script>
+    // 1. Starfield Particle Background
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function initStars() {
+      resizeCanvas();
+      stars = [];
+      const count = Math.min(180, Math.floor((canvas.width * canvas.height) / 9000));
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.7 + 0.3,
+          alpha: Math.random() * 0.75 + 0.15,
+          speedY: Math.random() * 0.18 + 0.03,
+          twinkleSpeed: (Math.random() - 0.5) * 0.015,
+          purpleTint: Math.random() > 0.82
+        });
+      }
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const s of stars) {
+        s.y -= s.speedY;
+        if (s.y < 0) {
+          s.y = canvas.height;
+          s.x = Math.random() * canvas.width;
+        }
+        s.alpha += s.twinkleSpeed;
+        if (s.alpha > 0.95 || s.alpha < 0.15) s.twinkleSpeed *= -1;
+
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = s.purpleTint
+          ? `rgba(192, 132, 252, ${s.alpha})`
+          : `rgba(255, 255, 255, ${s.alpha})`;
+        ctx.fill();
+      }
+      requestAnimationFrame(drawStars);
+    }
+
+    window.addEventListener('resize', initStars);
+    initStars();
+    drawStars();
+
+    // 2. Custom Glowing Cursor Ring
+    const cursorRing = document.getElementById('cursorRing');
+    window.addEventListener('mousemove', (e) => {
+      cursorRing.style.left = `${e.clientX}px`;
+      cursorRing.style.top = `${e.clientY}px`;
+    });
+
+    // 3. Dynamic Scroll Timeline & Active Nav Highlighting
+    const timelineContainer = document.getElementById('timelineContainer');
+    const timelineProgress = document.getElementById('timelineProgress');
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const sections = document.querySelectorAll('section[id], div#about');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    function updateOnScroll() {
+      const triggerBottom = window.innerHeight * 0.82;
+
+      timelineItems.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        if (rect.top < triggerBottom) {
+          item.classList.add('visible');
+        }
+        if (rect.top < window.innerHeight * 0.58 && rect.bottom > 120) {
+          item.classList.add('active-node');
+        } else {
+          item.classList.remove('active-node');
+        }
+      });
+
+      if (timelineContainer && timelineProgress) {
+        const rect = timelineContainer.getBoundingClientRect();
+        const startOffset = window.innerHeight * 0.55;
+        const scrolled = startOffset - rect.top;
+        const pct = Math.max(0, Math.min(100, (scrolled / rect.height) * 100));
+        timelineProgress.style.height = `${pct}%`;
+      }
+
+      // Update active navbar pill
+      let currentId = 'home';
+      sections.forEach((sec) => {
+        const top = sec.getBoundingClientRect().top;
+        if (top <= 180) {
+          currentId = sec.getAttribute('id');
+        }
+      });
+      navLinks.forEach((link) => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+      });
+    }
+
+    window.addEventListener('scroll', updateOnScroll, { passive: true });
+    window.addEventListener('load', updateOnScroll);
+    setTimeout(updateOnScroll, 100);
+
+    // 4. Filterable Skills Tabs
+    function filterSkills(category, btn) {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('.skill-card').forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // 5. Confusion Matrix Toggle (Normalized % vs Raw Sample Counts)
+    let cmShowCounts = false;
+    function toggleConfusionMatrixMode() {
+      cmShowCounts = !cmShowCounts;
+      const btn = document.getElementById('cmToggleBtn');
+      btn.textContent = cmShowCounts ? 'Show %' : 'Show Counts';
+      document.querySelectorAll('#cmGrid .cm-cell').forEach(cell => {
+        const valEl = cell.querySelector('.cm-val');
+        const subEl = cell.querySelector('.cm-pct');
+        if (cmShowCounts) {
+          valEl.textContent = cell.dataset.cnt;
+          subEl.textContent = cell.dataset.pct;
+        } else {
+          valEl.textContent = cell.dataset.pct;
+          subEl.textContent = cell.classList.contains('diag-high') ? `TP: ${cell.dataset.cnt}` : cell.dataset.cnt;
+        }
+      });
+    }
+
+    // 6. Resume Modal Controls
+    function openResumeModal() {
+      document.getElementById('resumeModal').classList.add('open');
+    }
+    function closeResumeModal() {
+      document.getElementById('resumeModal').classList.remove('open');
+    }
+  </script>
+</body>
+</html>
